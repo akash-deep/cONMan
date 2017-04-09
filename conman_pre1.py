@@ -10,6 +10,7 @@ import netifaces
 import socket
 import nmap
 from ftplib import FTP
+import string
 
 class MyHandler(FTPHandler):
 
@@ -108,6 +109,13 @@ def server():
 
     # start ftp server
     server.serve_forever()
+
+    #file sanitizer function
+def format_filename(s):
+    valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
+    filename = ''.join(c for c in s if c in valid_chars)
+    filename = filename.replace(' ','_') # I don't like spaces in filenames.
+    return filename
     
 def file_access():
     Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
@@ -166,6 +174,8 @@ def client():
     re_filename = file_access()
     
     lo_filename = re_filename.split('/')[-1]
+
+    lo_filename = format_filename(lo_filename)
     
     ftp.storbinary('STOR '+lo_filename, open(re_filename, 'rb'))
     
