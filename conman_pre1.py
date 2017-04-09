@@ -24,6 +24,7 @@ class MyHandler(FTPHandler):
     def on_login(self, username):
         # do something when user login
         print (str(self.remote_ip)+" just logged in::")
+        print ("File transfer is starting ....")
         pass
 
     def on_logout(self, username):
@@ -176,6 +177,7 @@ def client():
     lo_filename = re_filename.split('/')[-1]
 
     lo_filename = format_filename(lo_filename)
+    print ("Sending file .... " + lo_filename)
     
     ftp.storbinary('STOR '+lo_filename, open(re_filename, 'rb'))
     
