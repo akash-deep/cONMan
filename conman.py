@@ -48,6 +48,7 @@ class MyHandler(FTPHandler):
             file_r.close()
             print("Filename :: "+flnme)
             print("File size :: "+str(flsze)+" MB")
+            os.remove('cON_info_2121.txt')
         pass
 
     def on_incomplete_file_sent(self, file):
