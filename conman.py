@@ -40,6 +40,14 @@ class MyHandler(FTPHandler):
 
     def on_file_received(self, file):
         print ("Recieved file :: " + str(file))
+        if( str(file.split('/')[-1]) == 'cON_info_2121.txt'):
+            file_r = open('cON_info_2121.txt','r')
+            flnme = file_r.readline()
+            flsze = file_r.readline()
+            flsze = float(flsze)/1000000
+            file_r.close()
+            print("Filename :: "+flnme)
+            print("File size :: "+str(flsze)+" MB")
         pass
 
     def on_incomplete_file_sent(self, file):
