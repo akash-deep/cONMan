@@ -219,7 +219,11 @@ def client():
     ftp.quit()
     
 def main():
-    print("@@cONMan@@")
+    print("===============================================")
+    s = "         @@  C 0 |\| |\/| /-\ |\|  @@"
+    s.encode('utf8')
+    print(s)
+    print("===============================================")
     print(">>>press 1. to send file")
     print(">>>press 2. to recieve file")
     r = raw_input("Enter :: ")
