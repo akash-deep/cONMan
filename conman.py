@@ -11,6 +11,7 @@ import socket
 import nmap
 from ftplib import FTP
 import string
+import os
 
 class MyHandler(FTPHandler):
 
@@ -46,7 +47,6 @@ class MyHandler(FTPHandler):
 
     def on_incomplete_file_received(self, file):
         # remove partially uploaded files
-        import os
         os.remove(file)
         
 def server():
@@ -186,11 +186,25 @@ def client():
     re_filename = file_access()
     
     lo_filename = re_filename.split('/')[-1]
+    flsz = os.stat(re_filename).st_size
 
     lo_filename = format_filename(lo_filename)
+    
+    #creating info file
+    info_fln = 'cON_info_2121.txt'
+    file_ob = open(info_fln,'w')
+    file_ob.write(lo_filename+'\n')
+    file_ob.write(str(flsz)+'\n')
+    file_ob.close()
+    
     print ("Sending file .... " + lo_filename)
     
+    ftp.storbinary('STOR '+info_fln, open(info_fln, 'rb'))
     ftp.storbinary('STOR '+lo_filename, open(re_filename, 'rb'))
+    
+    #removing info file
+    os.remove(info_fln)
+    
     
     print('File sent. quitting')
     ftp.quit()
