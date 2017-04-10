@@ -149,28 +149,30 @@ def client():
     print ('My system ip of intrfce:: '+strintr+' is :: '+intrip+' ')
     sip = intrip.split('.')
     sip = sip[0]+'.'+sip[1]+'.'+sip[2]+'.0/24'
-    list_ip = []
+    req_ip = 0
+    while req_ip == 0:
+        list_ip = []
 
-    #deploying nmap
-    nm = nmap.PortScanner()
-    #'-pXXXX' is the port number
-    js_ip = nm.scan(hosts=sip, arguments='-p2121 --open')
+        #deploying nmap
+        nm = nmap.PortScanner()
+        #'-pXXXX' is the port number
+        js_ip = nm.scan(hosts=sip, arguments='-p2121 --open')
 
-    for i in js_ip['scan']:
-        list_ip.append(i)
+        for i in js_ip['scan']:
+            list_ip.append(i)
+                    
+        a=1
+        #Displaying machines where the reqd port is open
+        print('cONMan running in the following ips::')
+        print('Enter the index of the ip you wanna send it to:: ')
+        print "{:<8} {:<20}".format('$$Index','$$local_IP')
+        for i in list_ip : 
+                print "{:<8} {:<20}".format(str(a), str(i))
+                #print (str(a)+'.'+'  '+str(i))
+                a = a+1
                 
-    a=1
-    #Displaying machines where the reqd port is open
-    print('cONMan running in the following ips::')
-    print('Enter the index of the ip you wanna send it to:: ')
-    print "{:<8} {:<20}".format('$$Index','$$local_IP')
-    for i in list_ip : 
-            print "{:<8} {:<20}".format(str(a), str(i))
-            #print (str(a)+'.'+'  '+str(i))
-            a = a+1
-            
-    req_ndx= raw_input("Enter::")
-    req_ip = int(req_ndx)
+        req_ndx= raw_input("Enter reqd key or press 0 to scan again::")
+        req_ip = int(req_ndx)
     req_ip = req_ip - 1
     req_ip = list_ip[req_ip]
     
