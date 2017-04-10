@@ -54,13 +54,16 @@ def server():
     
     #Check for the available network interfaces
     intr = netifaces.interfaces()
-    a=0
+    a=1
+    print "{:<8} {:<20}".format('$$Key','$$Interface')
     for i in intr : 
-            print (str(a)+'.'+'  '+str(i))
+            print "{:<8} {:<20}".format(str(a), str(i))
+            #print (str(a)+'.'+'  '+str(i))
             a = a+1
 
     facech = raw_input("Enter :: ")
     facech = int(facech)
+    facech = facech - 1
     strintr = intr[facech]
     
     #User chooses the interface he/she wants to work with
@@ -129,13 +132,16 @@ def client():
 
     #Check for the available network interfaces
     intr = netifaces.interfaces()
-    a=0
+    a=1
+    print "{:<8} {:<20}".format('$$Key','$$Interface')
     for i in intr : 
-            print (str(a)+'.'+'  '+str(i))
+            print "{:<8} {:<20}".format(str(a), str(i))
+            #print (str(a)+'.'+'  '+str(i))
             a = a+1
 
     facech = raw_input("Enter :: ")
     facech = int(facech)
+    facech = facech - 1
     strintr = intr[facech]
 
     #User chooses the interface he/she wants to work with
@@ -153,16 +159,19 @@ def client():
     for i in js_ip['scan']:
         list_ip.append(i)
                 
-    a=0
+    a=1
     #Displaying machines where the reqd port is open
     print('cONMan running in the following ips::')
     print('Enter the index of the ip you wanna send it to:: ')
+    print "{:<8} {:<20}".format('$$Index','$$local_IP')
     for i in list_ip : 
-            print (str(a)+'.'+'  '+str(i))
+            print "{:<8} {:<20}".format(str(a), str(i))
+            #print (str(a)+'.'+'  '+str(i))
             a = a+1
             
     req_ndx= raw_input("Enter::")
     req_ip = int(req_ndx)
+    req_ip = req_ip - 1
     req_ip = list_ip[req_ip]
     
     print('beginning connection to '+ str(req_ip))
@@ -186,8 +195,8 @@ def client():
     
 def main():
     print("@@cONMan@@")
-    print("press 1. to send file")
-    print("press 2. to recieve file")
+    print(">>>press 1. to send file")
+    print(">>>press 2. to recieve file")
     r = raw_input("Enter :: ")
     r = (int)(r)
     if r==1 :
