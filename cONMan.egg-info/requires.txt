@@ -1,0 +1,5 @@
+pyftpdlib
+ftplib
+netifaces
+python-nmap
+python-tk
