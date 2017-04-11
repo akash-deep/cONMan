@@ -11,7 +11,29 @@ import socket
 import nmap
 from ftplib import FTP
 import string
+import progressbar
 import os
+import time
+from time import sleep
+import thread
+
+def sta_bar(flnm, flsze):
+    max_i = int(flsze)
+    bar = progressbar.ProgressBar(maxval=max_i, \
+        widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+    bar.start()
+    flnm = flnm.rstrip()
+    i = None
+    while i is None:
+        try:
+            i = os.stat(flnm).st_size
+        except:
+            pass
+    for i in xrange(max_i):
+        bar.update(os.stat(flnm).st_size)
+        sleep(0.1)
+    bar.finish()
+    
 
 class MyHandler(FTPHandler):
 
@@ -44,11 +66,12 @@ class MyHandler(FTPHandler):
             file_r = open('cON_info_2121.txt','r')
             flnme = file_r.readline()
             flsze = file_r.readline()
-            flsze = float(flsze)/1000000
+            flsz = float(flsze)/1000000
             file_r.close()
             print("Filename :: "+flnme)
-            print("File size :: "+str(flsze)+" MB")
+            print("File size :: "+str(flsz)+" MB")
             os.remove('cON_info_2121.txt')
+            thread.start_new_thread( sta_bar, (flnme,  int(flsze)) )
         pass
 
     def on_incomplete_file_sent(self, file):
