@@ -14,5 +14,7 @@ setup(name='cONMan',
           'netifaces',
           'python-nmap',
           'python-tk',
+	  'progressbar',
+	  'nmap',
       ],
       zip_safe=False)
