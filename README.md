@@ -15,3 +15,7 @@ the sender then will have to choose the file which is to be sent from GUI file c
 
 The receiver gets a progress bar displayed on the screen ... After it completes the file will have been transferred by then... and both the sender and receiver close connnections mutually .
 
+The sender can send send entire folders but then it needs to be compressed to a .zip or .tar.gz
+
+
+
